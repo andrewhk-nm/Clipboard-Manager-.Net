@@ -22,79 +22,147 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.components = New System.ComponentModel.Container()
+        Me.txtUL = New System.Windows.Forms.TextBox()
+        Me.txtUR = New System.Windows.Forms.TextBox()
+        Me.txtLL = New System.Windows.Forms.TextBox()
+        Me.txtLR = New System.Windows.Forms.TextBox()
+        Me.txtCur = New System.Windows.Forms.TextBox()
+        Me.lstHistory = New System.Windows.Forms.ListBox()
+        Me.tmrCheckClipboard = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrRestartCheckClipboard = New System.Windows.Forms.Timer(Me.components)
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FunctionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TextBox1
+        'txtUL
         '
-        Me.TextBox1.Location = New System.Drawing.Point(12, 12)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(114, 20)
-        Me.TextBox1.TabIndex = 0
+        Me.txtUL.Location = New System.Drawing.Point(12, 38)
+        Me.txtUL.Multiline = True
+        Me.txtUL.Name = "txtUL"
+        Me.txtUL.Size = New System.Drawing.Size(114, 20)
+        Me.txtUL.TabIndex = 0
         '
-        'TextBox2
+        'txtUR
         '
-        Me.TextBox2.Location = New System.Drawing.Point(166, 12)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(114, 20)
-        Me.TextBox2.TabIndex = 1
+        Me.txtUR.Location = New System.Drawing.Point(166, 38)
+        Me.txtUR.Multiline = True
+        Me.txtUR.Name = "txtUR"
+        Me.txtUR.Size = New System.Drawing.Size(114, 20)
+        Me.txtUR.TabIndex = 1
         '
-        'TextBox3
+        'txtLL
         '
-        Me.TextBox3.Location = New System.Drawing.Point(12, 64)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(114, 20)
-        Me.TextBox3.TabIndex = 2
+        Me.txtLL.Location = New System.Drawing.Point(12, 64)
+        Me.txtLL.Multiline = True
+        Me.txtLL.Name = "txtLL"
+        Me.txtLL.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtLL.Size = New System.Drawing.Size(114, 20)
+        Me.txtLL.TabIndex = 2
         '
-        'TextBox4
+        'txtLR
         '
-        Me.TextBox4.Location = New System.Drawing.Point(166, 64)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(114, 20)
-        Me.TextBox4.TabIndex = 3
+        Me.txtLR.Location = New System.Drawing.Point(166, 64)
+        Me.txtLR.Multiline = True
+        Me.txtLR.Name = "txtLR"
+        Me.txtLR.Size = New System.Drawing.Size(114, 20)
+        Me.txtLR.TabIndex = 3
         '
-        'TextBox5
+        'txtCur
         '
-        Me.TextBox5.Location = New System.Drawing.Point(166, 119)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(114, 20)
-        Me.TextBox5.TabIndex = 4
+        Me.txtCur.Location = New System.Drawing.Point(166, 119)
+        Me.txtCur.Multiline = True
+        Me.txtCur.Name = "txtCur"
+        Me.txtCur.Size = New System.Drawing.Size(114, 108)
+        Me.txtCur.TabIndex = 4
         '
-        'ListBox1
+        'lstHistory
         '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(12, 119)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(114, 108)
-        Me.ListBox1.TabIndex = 5
+        Me.lstHistory.FormattingEnabled = True
+        Me.lstHistory.Location = New System.Drawing.Point(12, 119)
+        Me.lstHistory.Name = "lstHistory"
+        Me.lstHistory.Size = New System.Drawing.Size(114, 108)
+        Me.lstHistory.TabIndex = 5
+        '
+        'tmrCheckClipboard
+        '
+        Me.tmrCheckClipboard.Enabled = True
+        Me.tmrCheckClipboard.Interval = 1000
+        '
+        'tmrRestartCheckClipboard
+        '
+        Me.tmrRestartCheckClipboard.Interval = 1000
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripMenuItem, Me.ClearToolStripMenuItem, Me.FunctionToolStripMenuItem, Me.LToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(461, 24)
+        Me.MenuStrip1.TabIndex = 6
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'CopyToolStripMenuItem
+        '
+        Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
+        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
+        Me.CopyToolStripMenuItem.Text = "Copy"
+        '
+        'ClearToolStripMenuItem
+        '
+        Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
+        Me.ClearToolStripMenuItem.Text = "Clear"
+        '
+        'FunctionToolStripMenuItem
+        '
+        Me.FunctionToolStripMenuItem.Name = "FunctionToolStripMenuItem"
+        Me.FunctionToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
+        Me.FunctionToolStripMenuItem.Text = "Function"
+        '
+        'LToolStripMenuItem
+        '
+        Me.LToolStripMenuItem.Name = "LToolStripMenuItem"
+        Me.LToolStripMenuItem.Size = New System.Drawing.Size(33, 20)
+        Me.LToolStripMenuItem.Text = "L="
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(461, 355)
-        Me.Controls.Add(Me.ListBox1)
-        Me.Controls.Add(Me.TextBox5)
-        Me.Controls.Add(Me.TextBox4)
-        Me.Controls.Add(Me.TextBox3)
-        Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.lstHistory)
+        Me.Controls.Add(Me.txtCur)
+        Me.Controls.Add(Me.txtLR)
+        Me.Controls.Add(Me.txtLL)
+        Me.Controls.Add(Me.txtUR)
+        Me.Controls.Add(Me.txtUL)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "Form1"
         Me.Text = "Form1"
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
-    Friend WithEvents ListBox1 As System.Windows.Forms.ListBox
+    Friend WithEvents txtUL As System.Windows.Forms.TextBox
+    Friend WithEvents txtUR As System.Windows.Forms.TextBox
+    Friend WithEvents txtLL As System.Windows.Forms.TextBox
+    Friend WithEvents txtLR As System.Windows.Forms.TextBox
+    Friend WithEvents txtCur As System.Windows.Forms.TextBox
+    Friend WithEvents lstHistory As System.Windows.Forms.ListBox
+    Friend WithEvents tmrCheckClipboard As System.Windows.Forms.Timer
+    Friend WithEvents tmrRestartCheckClipboard As System.Windows.Forms.Timer
+    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents CopyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ClearToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents FunctionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
