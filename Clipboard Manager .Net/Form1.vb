@@ -80,6 +80,7 @@ Public Class frmMain
                 If NewText <> Clipboard.GetText Then
                     'Update the clipboard if it's changed
                     Clipboard.SetText(NewText)
+                    txtCur.Text = NewText
                 End If
 
             End If
@@ -160,7 +161,7 @@ Public Class frmMain
     End Sub
 
     Private Sub AnotherToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AnotherToolStripMenuItem.Click
-
+        txtUL.Text = txtCur.Text
     End Sub
 
     Private Sub F1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles F1ToolStripMenuItem.Click
@@ -312,5 +313,67 @@ Public Class frmMain
     End Sub
 
 
+    Private Sub FromULToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FromULToolStripMenuItem.Click
+        'Copy from Upper Left box to the clipboard
+        UpdateClipboard = True
+        ApplyFilter(txtUL.Text)
+    End Sub
+
+    Private Sub FromURToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FromURToolStripMenuItem.Click
+        'Copy from Upper Right box to the clipboard
+        UpdateClipboard = True
+        ApplyFilter(txtUR.Text)
+    End Sub
+
+    Private Sub FromLLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FromLLToolStripMenuItem.Click
+        'Copy from Lower Left box to the clipboard
+        UpdateClipboard = True
+        ApplyFilter(txtLL.Text)
+    End Sub
+
+    Private Sub FromLRToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FromLRToolStripMenuItem.Click
+        'Copy from Lower Right box to the clipboard
+        UpdateClipboard = True
+        ApplyFilter(txtLR.Text)
+    End Sub
+
+    Private Sub ToURToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToURToolStripMenuItem.Click
+        'Replace Upper right box with the current clipboard text
+        txtUR.Text = txtCur.Text
+    End Sub
+
+    Private Sub ToLLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToLLToolStripMenuItem.Click
+        'Replace Lower Left box with the current clipboard text
+        txtLL.Text = txtCur.Text
+    End Sub
+
+    Private Sub ToLRToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToLRToolStripMenuItem.Click
+        'Replace Lower right box with the current clipboard text
+        txtLR.Text = txtCur.Text
+    End Sub
+
+    Private Sub ClearULToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearULToolStripMenuItem.Click
+        'Clear the upper left box
+        txtUL.Text = ""
+    End Sub
+
+    Private Sub ClearURToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearURToolStripMenuItem.Click
+        'Clear the upper left box
+        txtUR.Text = ""
+    End Sub
+
+    Private Sub ClearLLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearLLToolStripMenuItem.Click
+        'Clear the upper left box
+        txtLL.Text = ""
+    End Sub
+
+    Private Sub ClearLRToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearLRToolStripMenuItem.Click
+        'Clear the upper left box
+        txtLR.Text = ""
+    End Sub
+
+    Private Sub ToolStripTextBox1_Click_1(sender As Object, e As EventArgs) Handles ToolStripTextBox1.Click
+
+    End Sub
 End Class
 

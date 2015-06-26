@@ -61,6 +61,11 @@ Partial Class frmMain
         Me.ToolStripTextBox2 = New System.Windows.Forms.ToolStripTextBox()
         Me.mnuStatus = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLength = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EnabledToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.FindTheseCharactersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReplaceWithTheseCharactersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -296,7 +301,7 @@ Partial Class frmMain
         '
         'F4ToolStripMenuItem
         '
-        Me.F4ToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox1, Me.ToolStripTextBox2})
+        Me.F4ToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnabledToolStripMenuItem, Me.ToolStripMenuItem3, Me.FindTheseCharactersToolStripMenuItem, Me.ToolStripTextBox1, Me.ToolStripMenuItem2, Me.ReplaceWithTheseCharactersToolStripMenuItem, Me.ToolStripTextBox2})
         Me.F4ToolStripMenuItem.Name = "F4ToolStripMenuItem"
         Me.F4ToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D4), System.Windows.Forms.Keys)
         Me.F4ToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
@@ -304,15 +309,15 @@ Partial Class frmMain
         '
         'ToolStripTextBox1
         '
+        Me.ToolStripTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
         Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 23)
-        Me.ToolStripTextBox1.Text = "Find These Chars"
         '
         'ToolStripTextBox2
         '
+        Me.ToolStripTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ToolStripTextBox2.Name = "ToolStripTextBox2"
         Me.ToolStripTextBox2.Size = New System.Drawing.Size(100, 23)
-        Me.ToolStripTextBox2.Text = "Replace With These"
         '
         'mnuStatus
         '
@@ -325,6 +330,35 @@ Partial Class frmMain
         Me.mnuLength.Name = "mnuLength"
         Me.mnuLength.Size = New System.Drawing.Size(52, 20)
         Me.mnuLength.Text = "C= L="
+        '
+        'EnabledToolStripMenuItem
+        '
+        Me.EnabledToolStripMenuItem.CheckOnClick = True
+        Me.EnabledToolStripMenuItem.Name = "EnabledToolStripMenuItem"
+        Me.EnabledToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.EnabledToolStripMenuItem.Text = "Execute!"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(160, 6)
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(160, 6)
+        '
+        'FindTheseCharactersToolStripMenuItem
+        '
+        Me.FindTheseCharactersToolStripMenuItem.Name = "FindTheseCharactersToolStripMenuItem"
+        Me.FindTheseCharactersToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.FindTheseCharactersToolStripMenuItem.Text = "Find this"
+        '
+        'ReplaceWithTheseCharactersToolStripMenuItem
+        '
+        Me.ReplaceWithTheseCharactersToolStripMenuItem.Name = "ReplaceWithTheseCharactersToolStripMenuItem"
+        Me.ReplaceWithTheseCharactersToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.ReplaceWithTheseCharactersToolStripMenuItem.Text = "Replace with this"
         '
         'frmMain
         '
@@ -385,5 +419,10 @@ Partial Class frmMain
     Friend WithEvents PCaseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripTextBox1 As System.Windows.Forms.ToolStripTextBox
     Friend WithEvents ToolStripTextBox2 As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents EnabledToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents FindTheseCharactersToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ReplaceWithTheseCharactersToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
