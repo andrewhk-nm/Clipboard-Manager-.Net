@@ -34,6 +34,11 @@ Partial Class frmMain
         Me.tmrRestartCheckClipboard = New System.Windows.Forms.Timer(Me.components)
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CheckClipboardIntervalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripTextBox3 = New System.Windows.Forms.ToolStripTextBox()
+        Me.PauseUpdatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripTextBox4 = New System.Windows.Forms.ToolStripTextBox()
+        Me.AddToHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FromULToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FromURToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -57,15 +62,16 @@ Partial Class frmMain
         Me.LCaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PCaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.F4ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EnabledToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.FindTheseCharactersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ReplaceWithTheseCharactersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripTextBox2 = New System.Windows.Forms.ToolStripTextBox()
         Me.mnuStatus = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLength = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EnabledToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.FindTheseCharactersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReplaceWithTheseCharactersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lstHistoryActual = New System.Windows.Forms.ListBox()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -139,9 +145,42 @@ Partial Class frmMain
         '
         'SettingsToolStripMenuItem
         '
+        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckClipboardIntervalToolStripMenuItem, Me.PauseUpdatesToolStripMenuItem, Me.AddToHistoryToolStripMenuItem})
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
         Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.SettingsToolStripMenuItem.Text = "&Settings"
+        '
+        'CheckClipboardIntervalToolStripMenuItem
+        '
+        Me.CheckClipboardIntervalToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox3})
+        Me.CheckClipboardIntervalToolStripMenuItem.Name = "CheckClipboardIntervalToolStripMenuItem"
+        Me.CheckClipboardIntervalToolStripMenuItem.Size = New System.Drawing.Size(255, 22)
+        Me.CheckClipboardIntervalToolStripMenuItem.Text = "Check Clipboard Interval (1000ms)"
+        '
+        'ToolStripTextBox3
+        '
+        Me.ToolStripTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ToolStripTextBox3.Name = "ToolStripTextBox3"
+        Me.ToolStripTextBox3.Size = New System.Drawing.Size(100, 23)
+        '
+        'PauseUpdatesToolStripMenuItem
+        '
+        Me.PauseUpdatesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripTextBox4})
+        Me.PauseUpdatesToolStripMenuItem.Name = "PauseUpdatesToolStripMenuItem"
+        Me.PauseUpdatesToolStripMenuItem.Size = New System.Drawing.Size(255, 22)
+        Me.PauseUpdatesToolStripMenuItem.Text = "Pause Updates Interval (1000ms)"
+        '
+        'ToolStripTextBox4
+        '
+        Me.ToolStripTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ToolStripTextBox4.Name = "ToolStripTextBox4"
+        Me.ToolStripTextBox4.Size = New System.Drawing.Size(100, 23)
+        '
+        'AddToHistoryToolStripMenuItem
+        '
+        Me.AddToHistoryToolStripMenuItem.Name = "AddToHistoryToolStripMenuItem"
+        Me.AddToHistoryToolStripMenuItem.Size = New System.Drawing.Size(255, 22)
+        Me.AddToHistoryToolStripMenuItem.Text = "Add to History"
         '
         'CopyToolStripMenuItem
         '
@@ -307,11 +346,40 @@ Partial Class frmMain
         Me.F4ToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
         Me.F4ToolStripMenuItem.Text = "Replace Chrs"
         '
+        'EnabledToolStripMenuItem
+        '
+        Me.EnabledToolStripMenuItem.CheckOnClick = True
+        Me.EnabledToolStripMenuItem.Name = "EnabledToolStripMenuItem"
+        Me.EnabledToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.EnabledToolStripMenuItem.Text = "Execute!"
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(160, 6)
+        '
+        'FindTheseCharactersToolStripMenuItem
+        '
+        Me.FindTheseCharactersToolStripMenuItem.Name = "FindTheseCharactersToolStripMenuItem"
+        Me.FindTheseCharactersToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.FindTheseCharactersToolStripMenuItem.Text = "Find this"
+        '
         'ToolStripTextBox1
         '
         Me.ToolStripTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
         Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 23)
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(160, 6)
+        '
+        'ReplaceWithTheseCharactersToolStripMenuItem
+        '
+        Me.ReplaceWithTheseCharactersToolStripMenuItem.Name = "ReplaceWithTheseCharactersToolStripMenuItem"
+        Me.ReplaceWithTheseCharactersToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.ReplaceWithTheseCharactersToolStripMenuItem.Text = "Replace with this"
         '
         'ToolStripTextBox2
         '
@@ -331,40 +399,21 @@ Partial Class frmMain
         Me.mnuLength.Size = New System.Drawing.Size(52, 20)
         Me.mnuLength.Text = "C= L="
         '
-        'EnabledToolStripMenuItem
+        'lstHistoryActual
         '
-        Me.EnabledToolStripMenuItem.CheckOnClick = True
-        Me.EnabledToolStripMenuItem.Name = "EnabledToolStripMenuItem"
-        Me.EnabledToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.EnabledToolStripMenuItem.Text = "Execute!"
-        '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(160, 6)
-        '
-        'ToolStripMenuItem3
-        '
-        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(160, 6)
-        '
-        'FindTheseCharactersToolStripMenuItem
-        '
-        Me.FindTheseCharactersToolStripMenuItem.Name = "FindTheseCharactersToolStripMenuItem"
-        Me.FindTheseCharactersToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.FindTheseCharactersToolStripMenuItem.Text = "Find this"
-        '
-        'ReplaceWithTheseCharactersToolStripMenuItem
-        '
-        Me.ReplaceWithTheseCharactersToolStripMenuItem.Name = "ReplaceWithTheseCharactersToolStripMenuItem"
-        Me.ReplaceWithTheseCharactersToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.ReplaceWithTheseCharactersToolStripMenuItem.Text = "Replace with this"
+        Me.lstHistoryActual.FormattingEnabled = True
+        Me.lstHistoryActual.Location = New System.Drawing.Point(12, 233)
+        Me.lstHistoryActual.Name = "lstHistoryActual"
+        Me.lstHistoryActual.Size = New System.Drawing.Size(114, 108)
+        Me.lstHistoryActual.TabIndex = 7
+        Me.lstHistoryActual.Visible = False
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(461, 355)
+        Me.Controls.Add(Me.lstHistoryActual)
         Me.Controls.Add(Me.lstHistory)
         Me.Controls.Add(Me.txtCur)
         Me.Controls.Add(Me.txtLR)
@@ -424,5 +473,11 @@ Partial Class frmMain
     Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents FindTheseCharactersToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ReplaceWithTheseCharactersToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CheckClipboardIntervalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PauseUpdatesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AddToHistoryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents lstHistoryActual As System.Windows.Forms.ListBox
+    Friend WithEvents ToolStripTextBox3 As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents ToolStripTextBox4 As System.Windows.Forms.ToolStripTextBox
 
 End Class

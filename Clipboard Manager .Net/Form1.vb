@@ -6,7 +6,11 @@ Public Class frmMain
 
     Private Sub tmrCheckClipboard_Tick(sender As Object, e As EventArgs) Handles tmrCheckClipboard.Tick
         'If the filtered clipboard doesn't equal the displayed clipboard, update.
-        If Not txtCur.Text = ApplyFilter(Clipboard.GetText, , False) Then txtCur.Text = ApplyFilter(Clipboard.GetText)
+        If Not txtCur.Text = ApplyFilter(Clipboard.GetText, , False) Then
+            txtCur.Text = ApplyFilter(Clipboard.GetText)
+            addHistory(txtCur.Text)
+        End If
+
     End Sub
 
     Private Sub txtCur_Click(sender As Object, e As EventArgs) Handles txtCur.Click
@@ -20,9 +24,16 @@ Public Class frmMain
 
     Private Sub txtCur_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCur.KeyDown
         tmrCheckClipboard.Enabled = False 'reset the update time when a keypress happens
+        tmrRestartCheckClipboard.Enabled = False 'toggle the restart timer.
         tmrRestartCheckClipboard.Enabled = True 'Count down to reenable the clipboard checking timer
         UpdateClipboard = True 'Update the clipboard when keypresses stop or the box loses focus
 
+    End Sub
+
+    Private Sub txtCur_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCur.KeyPress
+        'tmrCheckClipboard.Enabled = False 'reset the update time when a keypress happens
+        'tmrRestartCheckClipboard.Enabled = True 'Count down to reenable the clipboard checking timer
+        'UpdateClipboard = True 'Update the clipboard when keypresses stop or the box loses focus
     End Sub
 
     Private Sub txtCur_KeyUp(sender As Object, e As KeyEventArgs) Handles txtCur.KeyUp
@@ -81,6 +92,7 @@ Public Class frmMain
                     'Update the clipboard if it's changed
                     Clipboard.SetText(NewText)
                     txtCur.Text = NewText
+                    addHistory(NewText)
                 End If
 
             End If
@@ -372,8 +384,75 @@ Public Class frmMain
         txtLR.Text = ""
     End Sub
 
-    Private Sub ToolStripTextBox1_Click_1(sender As Object, e As EventArgs) Handles ToolStripTextBox1.Click
+    Private Sub addHistory(NewHist As String)
+        'Add the NewHist to the history list. 
+        'If duplicate, move it to the top
+        'Replace vbCrLf with | for the display
 
+        Dim NewDisplay As String 'Holds the data to display in the list.
+
+        Debug.Print("addHistory" & TimeOfDay)
+
+        NewDisplay = Replace(NewHist, vbCrLf, "|")
+
+        'The item is already in History. Remove it so it's not a dup when it moves to the top
+        If lstHistoryActual.Items.Contains(NewHist) Then
+            lstHistory.Items.Remove(NewDisplay)
+            lstHistoryActual.Items.Remove(NewHist)
+        End If
+
+        lstHistory.Items.Insert(0, NewDisplay)
+        lstHistoryActual.Items.Insert(0, NewHist)
+    End Sub
+
+    Private Sub AddToHistoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddToHistoryToolStripMenuItem.Click
+        addHistory(txtCur.Text)
+    End Sub
+
+    Private Sub lstHistory_DoubleClick(sender As Object, e As EventArgs) Handles lstHistory.DoubleClick
+        'When the user double clicks on a displayed history item, add the actual data to the clipboard
+        UpdateClipboard = True
+        DoUpdateClipboard(lstHistoryActual.Items.Item(lstHistory.SelectedIndex))
+    End Sub
+
+    Private Sub CheckClipboard1000msToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckClipboardIntervalToolStripMenuItem.Click
+
+    End Sub
+
+
+
+    Private Sub ToolStripTextBox3_TextChanged(sender As Object, e As EventArgs) Handles ToolStripTextBox3.TextChanged
+        On Error GoTo errh
+        'Set the interval for the clipboard check timer
+        If (ToolStripTextBox3.Text <> "") Then
+            tmrCheckClipboard.Interval = CType(ToolStripTextBox3.Text, Double)
+        End If
+        CheckClipboardIntervalToolStripMenuItem.Text = "Check Clipboard Interval (" & tmrCheckClipboard.Interval.ToString & "ms)"
+
+        Exit Sub
+errh:
+        Debug.Print("ToolStripTextBox3_TextChanged " & Err.Number.ToString & " " & Err.Description)
+        'Invalid non numeric entry or overflow in the text box. Just exit w/o updating
+        If Err.Number = 13 Or Err.Number = 6 Then Exit Sub
+        Stop
+        Resume
+    End Sub
+
+    Private Sub ToolStripTextBox4_TextChanged(sender As Object, e As EventArgs) Handles ToolStripTextBox4.TextChanged
+        On Error GoTo errh
+        'Set the interval for the restart clipboard check timer
+        If (ToolStripTextBox3.Text <> "") Then
+            tmrRestartCheckClipboard.Interval = CType(ToolStripTextBox4.Text, Double)
+        End If
+        PauseUpdatesToolStripMenuItem.Text = "Pause Updates Interval (" & tmrRestartCheckClipboard.Interval.ToString & "ms)"
+
+        Exit Sub
+errh:
+        Debug.Print("ToolStripTextBox4_TextChanged " & Err.Number.ToString & " " & Err.Description)
+        'Invalid, non numeric entry in the text box. Just exit w/o updating
+        If Err.Number = 13 Or Err.Number = 6 Then Exit Sub
+        Stop
+        Resume
     End Sub
 End Class
 
