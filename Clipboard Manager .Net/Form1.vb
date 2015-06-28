@@ -2,15 +2,30 @@
 
 Public Class frmMain
 
-    Dim UpdateClipboard As Boolean 'When true, update the clipboad with new data before refreshing
+    Dim UpdateClipboard As Boolean 'When true, update the clipboad with new data from txtCur before refreshing
 
     Private Sub tmrCheckClipboard_Tick(sender As Object, e As EventArgs) Handles tmrCheckClipboard.Tick
-        'If the filtered clipboard doesn't equal the displayed clipboard, update.
-        If Not txtCur.Text = ApplyFilter(Clipboard.GetText, , False) Then
-            txtCur.Text = ApplyFilter(Clipboard.GetText)
+        'If the clipboard has new data, update txtCur.
+        If Not txtCur.Text = Clipboard.GetText Then
+            UpdateClipboard = False
+            'Add the unfiltered new clipboard data to the history. 
+            'Request that the function checks the 2nd item on the 
+            'list as well to prevent back-and-forth action if filters are applied.
+            addHistory(Clipboard.GetText, True)
+            DoUpdateTxtCur(Clipboard.GetText)
+            'After updating txtCur, if filters have changed the data, update the clipboard with modified txtCur
+            If Not txtCur.Text = Clipboard.GetText Then
+                UpdateClipboard = True
+                DoUpdateClipboard(txtCur.Text)
+            End If
             addHistory(txtCur.Text)
         End If
 
+    End Sub
+
+    Private Sub DoUpdateTxtCur(NewData As String)
+        'Apply filters and Update the txtCur with the new text data
+        txtCur.Text = ApplyFilter(NewData)
     End Sub
 
     Private Sub txtCur_Click(sender As Object, e As EventArgs) Handles txtCur.Click
@@ -91,7 +106,7 @@ Public Class frmMain
                 If NewText <> Clipboard.GetText Then
                     'Update the clipboard if it's changed
                     Clipboard.SetText(NewText)
-                    txtCur.Text = NewText
+                    DoUpdateTxtCur(NewText)
                     addHistory(NewText)
                 End If
 
@@ -120,11 +135,18 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
-        UpdateClipboard = False
+    Private Sub frmMain_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
+        'Save the state before unloading
+        If My.Application.SaveMySettingsOnExit Then SaveState()
     End Sub
 
-    Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
+        UpdateClipboard = False
+        My.Application.SaveMySettingsOnExit = True
+        LoadState() 'Load the previous saved state
+    End Sub
+
+    Private Sub frmMain_Resize(sender As Object, e As EventArgs) Handles Me.Resize
         'Hold the size of the form less the title bar
         Dim MeHeight As Integer = Me.Height - SystemInformation.CaptionHeight - MenuStrip1.Height
         Dim MeWidth As Integer = Me.Width - SystemInformation.Border3DSize.Width
@@ -178,9 +200,7 @@ Public Class frmMain
 
     Private Sub F1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles F1ToolStripMenuItem.Click
         'Trim the spaces from each end of the text
-        txtCur.Text = ApplyFilter(txtCur.Text)
-
-
+        DoUpdateTxtCur(txtCur.Text)
     End Sub
     Private Function ApplyFilter(CurText As String, Optional FilterType As String = "", Optional UpdateClipboardAfter As Boolean = True) As String
         tmrCheckClipboard.Enabled = False 'Stop checking the clipboard during the filter stage
@@ -248,18 +268,18 @@ Public Class frmMain
         End If
 
         ApplyFilter = CurText 'Return the filtered text 
-        If UpdateClipboard Then
-            If UpdateClipboardAfter Then
-                DoUpdateClipboard(CurText) 'Unless specifically disabled, update the clipboad with the next text
-            End If
-        End If
+        'If UpdateClipboard Then
+        'If UpdateClipboardAfter Then
+        'DoUpdateClipboard(CurText) 'Unless specifically disabled, update the clipboad with the next text
+        'End If
+        'End If
         UpdateStatusMenu()
         tmrCheckClipboard.Enabled = True
     End Function
 
     Private Sub F2ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles F2ToolStripMenuItem.Click
         'Remove leading zeros for account numbers
-        txtCur.Text = ApplyFilter(txtCur.Text)
+        DoUpdateTxtCur(txtCur.Text)
     End Sub
 
     Private Sub UCASEToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UCASEToolStripMenuItem.Click
@@ -275,7 +295,7 @@ Public Class frmMain
                 LCaseToolStripMenuItem.Checked = False
             End If
         End With
-        txtCur.Text = ApplyFilter(txtCur.Text)
+        DoUpdateTxtCur(txtCur.Text)
     End Sub
 
     Private Sub LCaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LCaseToolStripMenuItem.Click
@@ -291,7 +311,7 @@ Public Class frmMain
                 PCaseToolStripMenuItem.Checked = False
             End If
         End With
-        txtCur.Text = ApplyFilter(txtCur.Text)
+        DoUpdateTxtCur(txtCur.Text)
     End Sub
 
     Private Sub PCaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PCaseToolStripMenuItem.Click
@@ -307,7 +327,7 @@ Public Class frmMain
                 LCaseToolStripMenuItem.Checked = False
             End If
         End With
-        txtCur.Text = ApplyFilter(txtCur.Text)
+        DoUpdateTxtCur(txtCur.Text)
     End Sub
 
     Private Sub mnuStatus_Click(sender As Object, e As EventArgs) Handles mnuStatus.Click
@@ -328,25 +348,25 @@ Public Class frmMain
     Private Sub FromULToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FromULToolStripMenuItem.Click
         'Copy from Upper Left box to the clipboard
         UpdateClipboard = True
-        ApplyFilter(txtUL.Text)
+        DoUpdateTxtCur(txtUL.Text)
     End Sub
 
     Private Sub FromURToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FromURToolStripMenuItem.Click
         'Copy from Upper Right box to the clipboard
         UpdateClipboard = True
-        ApplyFilter(txtUR.Text)
+        DoUpdateTxtCur(txtUR.Text)
     End Sub
 
     Private Sub FromLLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FromLLToolStripMenuItem.Click
         'Copy from Lower Left box to the clipboard
         UpdateClipboard = True
-        ApplyFilter(txtLL.Text)
+        DoUpdateTxtCur(txtLL.Text)
     End Sub
 
     Private Sub FromLRToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FromLRToolStripMenuItem.Click
         'Copy from Lower Right box to the clipboard
         UpdateClipboard = True
-        ApplyFilter(txtLR.Text)
+        DoUpdateTxtCur(txtLR.Text)
     End Sub
 
     Private Sub ToURToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToURToolStripMenuItem.Click
@@ -384,25 +404,35 @@ Public Class frmMain
         txtLR.Text = ""
     End Sub
 
-    Private Sub addHistory(NewHist As String)
+    Private Sub addHistory(NewHist As String, Optional Check0and1 As Boolean = False)
         'Add the NewHist to the history list. 
         'If duplicate, move it to the top
         'Replace vbCrLf with | for the display
+        'If Check0and1 is true, don't update history if the passed NewHist is equal to items one or two.
+        'This will prevent bouncing back and forth when filters are applied
+        On Error GoTo errh
+        
 
-        Dim NewDisplay As String 'Holds the data to display in the list.
+        'The item is already in History, remove it so it's not a dup when it moves to the top. If it's already at the top do nothing
+        If (Check0and1 = False And lstHistoryActual.Items(0) <> NewHist) _
+            Xor (Check0and1 = True And lstHistoryActual.Items(1) <> NewHist) Then
 
-        Debug.Print("addHistory" & TimeOfDay)
+            Dim NewDisplay As String = ""  'Holds the data to display in the list.
+            NewDisplay = Replace(NewHist, vbCrLf, "|")
 
-        NewDisplay = Replace(NewHist, vbCrLf, "|")
+            If lstHistoryActual.Items.Contains(NewHist) Then
+                lstHistory.Items.Remove(NewDisplay)
+                lstHistoryActual.Items.Remove(NewHist)
+            End If
 
-        'The item is already in History. Remove it so it's not a dup when it moves to the top
-        If lstHistoryActual.Items.Contains(NewHist) Then
-            lstHistory.Items.Remove(NewDisplay)
-            lstHistoryActual.Items.Remove(NewHist)
+            'Add the Display and Actual history items
+            lstHistory.Items.Insert(0, NewDisplay)
+            lstHistoryActual.Items.Insert(0, NewHist)
         End If
 
-        lstHistory.Items.Insert(0, NewDisplay)
-        lstHistoryActual.Items.Insert(0, NewHist)
+        Exit Sub
+errh:
+        'If lstHistory doesn't contain enough items, just add it
     End Sub
 
     Private Sub AddToHistoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddToHistoryToolStripMenuItem.Click
@@ -453,6 +483,145 @@ errh:
         If Err.Number = 13 Or Err.Number = 6 Then Exit Sub
         Stop
         Resume
+    End Sub
+
+    Private Sub EnabledToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EnabledToolStripMenuItem1.Click
+        'TODO Given Member number, find referrals submitted or other notes
+    End Sub
+
+    Private Sub SaveState()
+        'Save the current items and properties
+
+        ''Open the settings file for writing
+        ''Dim CBMSaveFile = My.Computer.FileSystem.OpenTextFileWriter(My.Application.Info.DirectoryPath & "\CBM.ini", False)
+
+        ''Version Info
+        'Debug.Print(My.Application.Info.Version.ToString)
+        'CBMSaveFile.WriteLine("Version=" & My.Application.Info.Version.ToString)
+
+        With My.Settings
+            'Position
+            .LocationX = Me.Left
+            .LocationY = Me.Top
+            'Size
+            .SizeWidth = Me.Width
+            .SizeHeight = Me.Height
+            'Text Boxes
+            .txtLL = txtLL.Text
+            .txtLR = txtLR.Text
+            .txtUL = txtUL.Text
+            .txtUR = txtUR.Text
+            'Timer Intervals
+            .tmrCheckClipboardInterval = tmrCheckClipboard.Interval
+            .tmrRestartCheckClipboardInterval = tmrRestartCheckClipboard.Interval
+            'Function Settings (Replace Chrs)
+            .FSReplaceChrFind = ReplaceFindToolStripTextBox.Text
+            .FSReplaceChrWith = ReplaceWithToolStripTextBox.Text
+            'Function Settings (Lookup filename, Results To)
+            .FSLookupFN = LookupFileNameToolStripTextBox.Text
+            .FSResultsTo = ResultsToToolStripComboBox.Text
+        End With
+    End Sub
+
+    Private Sub LoadState()
+        'Load the settings
+
+        With My.Settings
+            'Position
+            Me.Left = .LocationX
+            Me.Top = .LocationY
+            'Size
+            Me.Width = .SizeWidth
+            Me.Height = .SizeHeight
+            'Text Boxes
+            txtLL.Text = .txtLL
+            txtLR.Text = .txtLR
+            txtUL.Text = .txtUL
+            txtUR.Text = .txtUR
+            'Timer Intervals
+            tmrCheckClipboard.Interval = .tmrCheckClipboardInterval
+            ToolStripTextBox3.Text = .tmrCheckClipboardInterval
+            tmrRestartCheckClipboard.Interval = .tmrRestartCheckClipboardInterval
+            ToolStripTextBox4.Text = .tmrRestartCheckClipboardInterval
+            'Function Settings (Replace Chrs)
+            ReplaceFindToolStripTextBox.Text = .FSReplaceChrFind
+            ReplaceWithToolStripTextBox.Text = .FSReplaceChrWith
+            'Function Settings (Lookup filename, Results To)
+            LookupFileNameToolStripTextBox.Text = .FSLookupFN
+            ResultsToToolStripComboBox.Text = .FSResultsTo
+        End With
+    End Sub
+
+    Private Sub SaveSettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveSettingsToolStripMenuItem.Click
+        SaveState()
+    End Sub
+
+    Private Sub LoadSettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoadSettingsToolStripMenuItem.Click
+        LoadState()
+    End Sub
+
+    Private Sub txtUL_DoubleClick(sender As Object, e As EventArgs) Handles txtUL.DoubleClick
+        'Copy the text in the box to the clipboard, and select everything
+        With txtUL
+            UpdateClipboard = True
+            tmrCheckClipboard.Enabled = False
+            DoUpdateClipboard(.Text)
+            .SelectAll()
+            tmrCheckClipboard.Enabled = True
+        End With
+
+    End Sub
+
+    Private Sub txtLR_DoubleClick(sender As Object, e As EventArgs) Handles txtLR.DoubleClick
+        'Copy the text in the box to the clipboard, and select everything
+        With txtLR
+            UpdateClipboard = True
+            tmrCheckClipboard.Enabled = False
+            DoUpdateClipboard(.Text)
+            .SelectAll()
+            tmrCheckClipboard.Enabled = True
+        End With
+    End Sub
+
+
+    Private Sub txtLR_TextChanged(sender As Object, e As EventArgs) Handles txtLR.TextChanged
+
+    End Sub
+
+    Private Sub txtUR_DoubleClick(sender As Object, e As EventArgs) Handles txtUR.DoubleClick
+        'Copy the text in the box to the clipboard, and select everything
+        With txtUR
+            UpdateClipboard = True
+            tmrCheckClipboard.Enabled = False
+            DoUpdateClipboard(.Text)
+            .SelectAll()
+            tmrCheckClipboard.Enabled = True
+        End With
+    End Sub
+
+    Private Sub txtUR_TextChanged(sender As Object, e As EventArgs) Handles txtUR.TextChanged
+
+    End Sub
+
+    Private Sub txtLL_DoubleClick(sender As Object, e As EventArgs) Handles txtLL.DoubleClick
+        'Copy the text in the box to the clipboard, and select everything
+        With txtLL
+            UpdateClipboard = True
+            tmrCheckClipboard.Enabled = False
+            DoUpdateClipboard(.Text)
+            .SelectAll()
+            tmrCheckClipboard.Enabled = True
+        End With
+    End Sub
+
+    Private Sub txtLL_TextChanged(sender As Object, e As EventArgs) Handles txtLL.TextChanged
+
+    End Sub
+
+    Private Sub ClipboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClipboardToolStripMenuItem.Click
+        'Clear the clipboard
+        Clipboard.Clear()
+        DoUpdateTxtCur("")
     End Sub
 End Class
 

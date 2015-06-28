@@ -1,7 +1,48 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" UseMySettingsClassName="true">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="LocationX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LocationY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="SizeWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">418</Value>
+    </Setting>
+    <Setting Name="SizeHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">311</Value>
+    </Setting>
+    <Setting Name="txtUL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Upper Left (From Settings)</Value>
+    </Setting>
+    <Setting Name="txtUR" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Upper Right (From Settings)</Value>
+    </Setting>
+    <Setting Name="txtLL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Lower Left (From Settings)</Value>
+    </Setting>
+    <Setting Name="txtLR" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Lower Right (From Settings)</Value>
+    </Setting>
+    <Setting Name="tmrCheckClipboardInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
+    <Setting Name="tmrRestartCheckClipboardInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">495</Value>
+    </Setting>
+    <Setting Name="FSReplaceChrFind" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Find This (From Settings)</Value>
+    </Setting>
+    <Setting Name="FSReplaceChrWith" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Replace With (From Settings)</Value>
+    </Setting>
+    <Setting Name="FSLookupFN" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FSResultsTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Lower Left</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

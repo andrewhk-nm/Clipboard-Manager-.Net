@@ -39,6 +39,8 @@ Partial Class frmMain
         Me.PauseUpdatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripTextBox4 = New System.Windows.Forms.ToolStripTextBox()
         Me.AddToHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoadSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FromULToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FromURToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -65,13 +67,23 @@ Partial Class frmMain
         Me.EnabledToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
         Me.FindTheseCharactersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
+        Me.ReplaceFindToolStripTextBox = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ReplaceWithTheseCharactersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripTextBox2 = New System.Windows.Forms.ToolStripTextBox()
+        Me.ReplaceWithToolStripTextBox = New System.Windows.Forms.ToolStripTextBox()
+        Me.LookupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EnabledToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ResultsToToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResultsToToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.LookupFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LookupFileNameToolStripTextBox = New System.Windows.Forms.ToolStripTextBox()
+        Me.BrowseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStatus = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLength = New System.Windows.Forms.ToolStripMenuItem()
         Me.lstHistoryActual = New System.Windows.Forms.ListBox()
+        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -120,6 +132,7 @@ Partial Class frmMain
         'lstHistory
         '
         Me.lstHistory.FormattingEnabled = True
+        Me.lstHistory.Items.AddRange(New Object() {" ", "  "})
         Me.lstHistory.Location = New System.Drawing.Point(12, 119)
         Me.lstHistory.Name = "lstHistory"
         Me.lstHistory.Size = New System.Drawing.Size(114, 108)
@@ -139,13 +152,13 @@ Partial Class frmMain
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.CopyToolStripMenuItem, Me.ClearToolStripMenuItem, Me.FunctionToolStripMenuItem, Me.mnuStatus, Me.mnuLength})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(461, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(402, 24)
         Me.MenuStrip1.TabIndex = 6
         Me.MenuStrip1.Text = "MenuStrip1"
         '
         'SettingsToolStripMenuItem
         '
-        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckClipboardIntervalToolStripMenuItem, Me.PauseUpdatesToolStripMenuItem, Me.AddToHistoryToolStripMenuItem})
+        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckClipboardIntervalToolStripMenuItem, Me.PauseUpdatesToolStripMenuItem, Me.AddToHistoryToolStripMenuItem, Me.SaveSettingsToolStripMenuItem, Me.LoadSettingsToolStripMenuItem})
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
         Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.SettingsToolStripMenuItem.Text = "&Settings"
@@ -181,6 +194,18 @@ Partial Class frmMain
         Me.AddToHistoryToolStripMenuItem.Name = "AddToHistoryToolStripMenuItem"
         Me.AddToHistoryToolStripMenuItem.Size = New System.Drawing.Size(255, 22)
         Me.AddToHistoryToolStripMenuItem.Text = "Add to History"
+        '
+        'SaveSettingsToolStripMenuItem
+        '
+        Me.SaveSettingsToolStripMenuItem.Name = "SaveSettingsToolStripMenuItem"
+        Me.SaveSettingsToolStripMenuItem.Size = New System.Drawing.Size(255, 22)
+        Me.SaveSettingsToolStripMenuItem.Text = "Save Settings"
+        '
+        'LoadSettingsToolStripMenuItem
+        '
+        Me.LoadSettingsToolStripMenuItem.Name = "LoadSettingsToolStripMenuItem"
+        Me.LoadSettingsToolStripMenuItem.Size = New System.Drawing.Size(255, 22)
+        Me.LoadSettingsToolStripMenuItem.Text = "Load Settings"
         '
         'CopyToolStripMenuItem
         '
@@ -253,7 +278,7 @@ Partial Class frmMain
         '
         'ClearToolStripMenuItem
         '
-        Me.ClearToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClearULToolStripMenuItem, Me.ClearURToolStripMenuItem, Me.ClearLLToolStripMenuItem, Me.ClearLRToolStripMenuItem})
+        Me.ClearToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClearULToolStripMenuItem, Me.ClearURToolStripMenuItem, Me.ClearLLToolStripMenuItem, Me.ClearLRToolStripMenuItem, Me.ToolStripMenuItem5, Me.ClipboardToolStripMenuItem})
         Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
         Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.ClearToolStripMenuItem.Text = "C&lear"
@@ -288,7 +313,7 @@ Partial Class frmMain
         '
         'FunctionToolStripMenuItem
         '
-        Me.FunctionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.F1ToolStripMenuItem, Me.F2ToolStripMenuItem, Me.F3ToolStripMenuItem, Me.F4ToolStripMenuItem})
+        Me.FunctionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.F1ToolStripMenuItem, Me.F2ToolStripMenuItem, Me.F3ToolStripMenuItem, Me.F4ToolStripMenuItem, Me.LookupToolStripMenuItem})
         Me.FunctionToolStripMenuItem.Name = "FunctionToolStripMenuItem"
         Me.FunctionToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
         Me.FunctionToolStripMenuItem.Text = "&Function"
@@ -340,9 +365,9 @@ Partial Class frmMain
         '
         'F4ToolStripMenuItem
         '
-        Me.F4ToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnabledToolStripMenuItem, Me.ToolStripMenuItem3, Me.FindTheseCharactersToolStripMenuItem, Me.ToolStripTextBox1, Me.ToolStripMenuItem2, Me.ReplaceWithTheseCharactersToolStripMenuItem, Me.ToolStripTextBox2})
+        Me.F4ToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnabledToolStripMenuItem, Me.ToolStripMenuItem3, Me.FindTheseCharactersToolStripMenuItem, Me.ReplaceFindToolStripTextBox, Me.ToolStripMenuItem2, Me.ReplaceWithTheseCharactersToolStripMenuItem, Me.ReplaceWithToolStripTextBox})
         Me.F4ToolStripMenuItem.Name = "F4ToolStripMenuItem"
-        Me.F4ToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D4), System.Windows.Forms.Keys)
+        Me.F4ToolStripMenuItem.ShortcutKeyDisplayString = ""
         Me.F4ToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
         Me.F4ToolStripMenuItem.Text = "Replace Chrs"
         '
@@ -350,6 +375,7 @@ Partial Class frmMain
         '
         Me.EnabledToolStripMenuItem.CheckOnClick = True
         Me.EnabledToolStripMenuItem.Name = "EnabledToolStripMenuItem"
+        Me.EnabledToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D4), System.Windows.Forms.Keys)
         Me.EnabledToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.EnabledToolStripMenuItem.Text = "Execute!"
         '
@@ -364,11 +390,11 @@ Partial Class frmMain
         Me.FindTheseCharactersToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.FindTheseCharactersToolStripMenuItem.Text = "Find this"
         '
-        'ToolStripTextBox1
+        'ReplaceFindToolStripTextBox
         '
-        Me.ToolStripTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
-        Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 23)
+        Me.ReplaceFindToolStripTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ReplaceFindToolStripTextBox.Name = "ReplaceFindToolStripTextBox"
+        Me.ReplaceFindToolStripTextBox.Size = New System.Drawing.Size(100, 23)
         '
         'ToolStripMenuItem2
         '
@@ -381,11 +407,63 @@ Partial Class frmMain
         Me.ReplaceWithTheseCharactersToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.ReplaceWithTheseCharactersToolStripMenuItem.Text = "Replace with this"
         '
-        'ToolStripTextBox2
+        'ReplaceWithToolStripTextBox
         '
-        Me.ToolStripTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ToolStripTextBox2.Name = "ToolStripTextBox2"
-        Me.ToolStripTextBox2.Size = New System.Drawing.Size(100, 23)
+        Me.ReplaceWithToolStripTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ReplaceWithToolStripTextBox.Name = "ReplaceWithToolStripTextBox"
+        Me.ReplaceWithToolStripTextBox.Size = New System.Drawing.Size(100, 23)
+        '
+        'LookupToolStripMenuItem
+        '
+        Me.LookupToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnabledToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ResultsToToolStripMenuItem, Me.LookupFileToolStripMenuItem})
+        Me.LookupToolStripMenuItem.Name = "LookupToolStripMenuItem"
+        Me.LookupToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D5), System.Windows.Forms.Keys)
+        Me.LookupToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
+        Me.LookupToolStripMenuItem.Text = "Lookup"
+        '
+        'EnabledToolStripMenuItem1
+        '
+        Me.EnabledToolStripMenuItem1.Name = "EnabledToolStripMenuItem1"
+        Me.EnabledToolStripMenuItem1.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D5), System.Windows.Forms.Keys)
+        Me.EnabledToolStripMenuItem1.Size = New System.Drawing.Size(156, 22)
+        Me.EnabledToolStripMenuItem1.Text = "Enabled"
+        '
+        'ToolStripMenuItem4
+        '
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(153, 6)
+        '
+        'ResultsToToolStripMenuItem
+        '
+        Me.ResultsToToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ResultsToToolStripComboBox})
+        Me.ResultsToToolStripMenuItem.Name = "ResultsToToolStripMenuItem"
+        Me.ResultsToToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.ResultsToToolStripMenuItem.Text = "Results to"
+        '
+        'ResultsToToolStripComboBox
+        '
+        Me.ResultsToToolStripComboBox.Items.AddRange(New Object() {"Upper Left", "Upper Right", "Lower Left", "Lower Right"})
+        Me.ResultsToToolStripComboBox.Name = "ResultsToToolStripComboBox"
+        Me.ResultsToToolStripComboBox.Size = New System.Drawing.Size(121, 23)
+        '
+        'LookupFileToolStripMenuItem
+        '
+        Me.LookupFileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LookupFileNameToolStripTextBox, Me.BrowseToolStripMenuItem})
+        Me.LookupFileToolStripMenuItem.Name = "LookupFileToolStripMenuItem"
+        Me.LookupFileToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.LookupFileToolStripMenuItem.Text = "Lookup File"
+        '
+        'LookupFileNameToolStripTextBox
+        '
+        Me.LookupFileNameToolStripTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LookupFileNameToolStripTextBox.Name = "LookupFileNameToolStripTextBox"
+        Me.LookupFileNameToolStripTextBox.Size = New System.Drawing.Size(100, 23)
+        '
+        'BrowseToolStripMenuItem
+        '
+        Me.BrowseToolStripMenuItem.Name = "BrowseToolStripMenuItem"
+        Me.BrowseToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.BrowseToolStripMenuItem.Text = "Browse"
         '
         'mnuStatus
         '
@@ -402,17 +480,30 @@ Partial Class frmMain
         'lstHistoryActual
         '
         Me.lstHistoryActual.FormattingEnabled = True
+        Me.lstHistoryActual.Items.AddRange(New Object() {" ", "  "})
         Me.lstHistoryActual.Location = New System.Drawing.Point(12, 233)
         Me.lstHistoryActual.Name = "lstHistoryActual"
         Me.lstHistoryActual.Size = New System.Drawing.Size(114, 108)
         Me.lstHistoryActual.TabIndex = 7
         Me.lstHistoryActual.Visible = False
         '
+        'ToolStripMenuItem5
+        '
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(180, 6)
+        '
+        'ClipboardToolStripMenuItem
+        '
+        Me.ClipboardToolStripMenuItem.Name = "ClipboardToolStripMenuItem"
+        Me.ClipboardToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F5), System.Windows.Forms.Keys)
+        Me.ClipboardToolStripMenuItem.Size = New System.Drawing.Size(183, 22)
+        Me.ClipboardToolStripMenuItem.Text = "&Clipboard"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(461, 355)
+        Me.ClientSize = New System.Drawing.Size(402, 272)
         Me.Controls.Add(Me.lstHistoryActual)
         Me.Controls.Add(Me.lstHistory)
         Me.Controls.Add(Me.txtCur)
@@ -466,8 +557,8 @@ Partial Class frmMain
     Friend WithEvents UCASEToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LCaseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PCaseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripTextBox1 As System.Windows.Forms.ToolStripTextBox
-    Friend WithEvents ToolStripTextBox2 As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents ReplaceFindToolStripTextBox As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents ReplaceWithToolStripTextBox As System.Windows.Forms.ToolStripTextBox
     Friend WithEvents EnabledToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripSeparator
@@ -479,5 +570,17 @@ Partial Class frmMain
     Friend WithEvents lstHistoryActual As System.Windows.Forms.ListBox
     Friend WithEvents ToolStripTextBox3 As System.Windows.Forms.ToolStripTextBox
     Friend WithEvents ToolStripTextBox4 As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents LookupToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ResultsToToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ResultsToToolStripComboBox As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents EnabledToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents SaveSettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LoadSettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LookupFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LookupFileNameToolStripTextBox As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents BrowseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ClipboardToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

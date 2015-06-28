@@ -15,12 +15,12 @@ Option Explicit On
 Namespace My
 
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0"), _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0"), _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)> _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
 
-        Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings), MySettings)
+        Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()), MySettings)
 
 #Region "My.Settings Auto-Save Functionality"
 #If _MyType = "WindowsForms" Then
@@ -41,32 +41,200 @@ Namespace My
             Get
 
 #If _MyType = "WindowsForms" Then
-                   If Not addedHandler Then
-                        SyncLock addedHandlerLockObject
-                            If Not addedHandler Then
-                                AddHandler My.Application.Shutdown, AddressOf AutoSaveSettings
-                                addedHandler = True
-                            End If
-                        End SyncLock
-                    End If
+                If Not addedHandler Then
+                    SyncLock addedHandlerLockObject
+                        If Not addedHandler Then
+                            AddHandler My.Application.Shutdown, AddressOf AutoSaveSettings
+                            addedHandler = True
+                        End If
+                    End SyncLock
+                End If
 #End If
                 Return defaultInstance
             End Get
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")> _
+        Public Property LocationX() As Integer
+            Get
+                Return CType(Me("LocationX"), Integer)
+            End Get
+            Set(value As Integer)
+                Me("LocationX") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")> _
+        Public Property LocationY() As Integer
+            Get
+                Return CType(Me("LocationY"), Integer)
+            End Get
+            Set(value As Integer)
+                Me("LocationY") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("418")> _
+        Public Property SizeWidth() As Integer
+            Get
+                Return CType(Me("SizeWidth"), Integer)
+            End Get
+            Set(value As Integer)
+                Me("SizeWidth") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("311")> _
+        Public Property SizeHeight() As Integer
+            Get
+                Return CType(Me("SizeHeight"), Integer)
+            End Get
+            Set(value As Integer)
+                Me("SizeHeight") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("Upper Left (From Settings)")> _
+        Public Property txtUL() As String
+            Get
+                Return CType(Me("txtUL"), String)
+            End Get
+            Set(value As String)
+                Me("txtUL") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("Upper Right (From Settings)")> _
+        Public Property txtUR() As String
+            Get
+                Return CType(Me("txtUR"), String)
+            End Get
+            Set(value As String)
+                Me("txtUR") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("Lower Left (From Settings)")> _
+        Public Property txtLL() As String
+            Get
+                Return CType(Me("txtLL"), String)
+            End Get
+            Set(value As String)
+                Me("txtLL") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("Lower Right (From Settings)")> _
+        Public Property txtLR() As String
+            Get
+                Return CType(Me("txtLR"), String)
+            End Get
+            Set(value As String)
+                Me("txtLR") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("500")> _
+        Public Property tmrCheckClipboardInterval() As Integer
+            Get
+                Return CType(Me("tmrCheckClipboardInterval"), Integer)
+            End Get
+            Set(value As Integer)
+                Me("tmrCheckClipboardInterval") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("495")> _
+        Public Property tmrRestartCheckClipboardInterval() As Integer
+            Get
+                Return CType(Me("tmrRestartCheckClipboardInterval"), Integer)
+            End Get
+            Set(value As Integer)
+                Me("tmrRestartCheckClipboardInterval") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("Find This (From Settings)")> _
+        Public Property FSReplaceChrFind() As String
+            Get
+                Return CType(Me("FSReplaceChrFind"), String)
+            End Get
+            Set(value As String)
+                Me("FSReplaceChrFind") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("Replace With (From Settings)")> _
+        Public Property FSReplaceChrWith() As String
+            Get
+                Return CType(Me("FSReplaceChrWith"), String)
+            End Get
+            Set(value As String)
+                Me("FSReplaceChrWith") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("")> _
+        Public Property FSLookupFN() As String
+            Get
+                Return CType(Me("FSLookupFN"), String)
+            End Get
+            Set(value As String)
+                Me("FSLookupFN") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("Lower Left")> _
+        Public Property FSResultsTo() As String
+            Get
+                Return CType(Me("FSResultsTo"), String)
+            End Get
+            Set(value As String)
+                Me("FSResultsTo") = value
+            End Set
         End Property
     End Class
 End Namespace
 
 Namespace My
-    
-    <Global.Microsoft.VisualBasic.HideModuleNameAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
+
+    <Global.Microsoft.VisualBasic.HideModuleNameAttribute(), _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+     Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()> _
     Friend Module MySettingsProperty
-        
-        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.WindowsApplication1.My.MySettings
+
+        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")> _
+        Friend ReadOnly Property Settings() As Global.CBM.My.MySettings
             Get
-                Return Global.WindowsApplication1.My.MySettings.Default
+                Return Global.CBM.My.MySettings.Default
             End Get
         End Property
     End Module
