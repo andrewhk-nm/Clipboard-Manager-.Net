@@ -56,6 +56,8 @@ Partial Class frmMain
         Me.ClearURToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearLLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearLRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FunctionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.F1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.F2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -72,7 +74,7 @@ Partial Class frmMain
         Me.ReplaceWithTheseCharactersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReplaceWithToolStripTextBox = New System.Windows.Forms.ToolStripTextBox()
         Me.LookupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EnabledToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LookupEnabledToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ResultsToToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResultsToToolStripComboBox = New System.Windows.Forms.ToolStripComboBox()
@@ -82,9 +84,11 @@ Partial Class frmMain
         Me.mnuStatus = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLength = New System.Windows.Forms.ToolStripMenuItem()
         Me.lstHistoryActual = New System.Windows.Forms.ListBox()
-        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReloadFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.CbMdbDataSet1 = New CBM.CBMdbDataSet()
         Me.MenuStrip1.SuspendLayout()
+        CType(Me.CbMdbDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtUL
@@ -152,7 +156,7 @@ Partial Class frmMain
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.CopyToolStripMenuItem, Me.ClearToolStripMenuItem, Me.FunctionToolStripMenuItem, Me.mnuStatus, Me.mnuLength})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(402, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(549, 24)
         Me.MenuStrip1.TabIndex = 6
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -311,6 +315,18 @@ Partial Class frmMain
         Me.ClearLRToolStripMenuItem.Size = New System.Drawing.Size(183, 22)
         Me.ClearLRToolStripMenuItem.Text = "&V - Clear LR"
         '
+        'ToolStripMenuItem5
+        '
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(180, 6)
+        '
+        'ClipboardToolStripMenuItem
+        '
+        Me.ClipboardToolStripMenuItem.Name = "ClipboardToolStripMenuItem"
+        Me.ClipboardToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F5), System.Windows.Forms.Keys)
+        Me.ClipboardToolStripMenuItem.Size = New System.Drawing.Size(183, 22)
+        Me.ClipboardToolStripMenuItem.Text = "&Clipboard"
+        '
         'FunctionToolStripMenuItem
         '
         Me.FunctionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.F1ToolStripMenuItem, Me.F2ToolStripMenuItem, Me.F3ToolStripMenuItem, Me.F4ToolStripMenuItem, Me.LookupToolStripMenuItem})
@@ -415,18 +431,19 @@ Partial Class frmMain
         '
         'LookupToolStripMenuItem
         '
-        Me.LookupToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnabledToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ResultsToToolStripMenuItem, Me.LookupFileToolStripMenuItem})
+        Me.LookupToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LookupEnabledToolStripMenuItem, Me.ToolStripMenuItem4, Me.ResultsToToolStripMenuItem, Me.LookupFileToolStripMenuItem})
         Me.LookupToolStripMenuItem.Name = "LookupToolStripMenuItem"
         Me.LookupToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D5), System.Windows.Forms.Keys)
         Me.LookupToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
         Me.LookupToolStripMenuItem.Text = "Lookup"
         '
-        'EnabledToolStripMenuItem1
+        'LookupEnabledToolStripMenuItem
         '
-        Me.EnabledToolStripMenuItem1.Name = "EnabledToolStripMenuItem1"
-        Me.EnabledToolStripMenuItem1.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D5), System.Windows.Forms.Keys)
-        Me.EnabledToolStripMenuItem1.Size = New System.Drawing.Size(156, 22)
-        Me.EnabledToolStripMenuItem1.Text = "Enabled"
+        Me.LookupEnabledToolStripMenuItem.CheckOnClick = True
+        Me.LookupEnabledToolStripMenuItem.Name = "LookupEnabledToolStripMenuItem"
+        Me.LookupEnabledToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D5), System.Windows.Forms.Keys)
+        Me.LookupEnabledToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.LookupEnabledToolStripMenuItem.Text = "Enabled"
         '
         'ToolStripMenuItem4
         '
@@ -445,10 +462,11 @@ Partial Class frmMain
         Me.ResultsToToolStripComboBox.Items.AddRange(New Object() {"Upper Left", "Upper Right", "Lower Left", "Lower Right"})
         Me.ResultsToToolStripComboBox.Name = "ResultsToToolStripComboBox"
         Me.ResultsToToolStripComboBox.Size = New System.Drawing.Size(121, 23)
+        Me.ResultsToToolStripComboBox.Text = "Lower Left"
         '
         'LookupFileToolStripMenuItem
         '
-        Me.LookupFileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LookupFileNameToolStripTextBox, Me.BrowseToolStripMenuItem})
+        Me.LookupFileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LookupFileNameToolStripTextBox, Me.BrowseToolStripMenuItem, Me.ReloadFileToolStripMenuItem})
         Me.LookupFileToolStripMenuItem.Name = "LookupFileToolStripMenuItem"
         Me.LookupFileToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.LookupFileToolStripMenuItem.Text = "Lookup File"
@@ -487,23 +505,32 @@ Partial Class frmMain
         Me.lstHistoryActual.TabIndex = 7
         Me.lstHistoryActual.Visible = False
         '
-        'ToolStripMenuItem5
+        'ReloadFileToolStripMenuItem
         '
-        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(180, 6)
+        Me.ReloadFileToolStripMenuItem.Name = "ReloadFileToolStripMenuItem"
+        Me.ReloadFileToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ReloadFileToolStripMenuItem.Text = "Reload File"
         '
-        'ClipboardToolStripMenuItem
+        'Button1
         '
-        Me.ClipboardToolStripMenuItem.Name = "ClipboardToolStripMenuItem"
-        Me.ClipboardToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F5), System.Windows.Forms.Keys)
-        Me.ClipboardToolStripMenuItem.Size = New System.Drawing.Size(183, 22)
-        Me.ClipboardToolStripMenuItem.Text = "&Clipboard"
+        Me.Button1.Location = New System.Drawing.Point(355, 251)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(124, 47)
+        Me.Button1.TabIndex = 9
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'CbMdbDataSet1
+        '
+        Me.CbMdbDataSet1.DataSetName = "CBMdbDataSet"
+        Me.CbMdbDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(402, 272)
+        Me.ClientSize = New System.Drawing.Size(549, 419)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lstHistoryActual)
         Me.Controls.Add(Me.lstHistory)
         Me.Controls.Add(Me.txtCur)
@@ -518,6 +545,7 @@ Partial Class frmMain
         Me.Text = "Clipboard Manager"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        CType(Me.CbMdbDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -573,7 +601,7 @@ Partial Class frmMain
     Friend WithEvents LookupToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ResultsToToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ResultsToToolStripComboBox As System.Windows.Forms.ToolStripComboBox
-    Friend WithEvents EnabledToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LookupEnabledToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents SaveSettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LoadSettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -582,5 +610,8 @@ Partial Class frmMain
     Friend WithEvents BrowseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ClipboardToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ReloadFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents CbMdbDataSet1 As CBM.CBMdbDataSet
 
 End Class
