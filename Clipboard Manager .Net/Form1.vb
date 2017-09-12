@@ -2,6 +2,8 @@
 
 Public Class frmMain
 
+    'First change after successful publish/push to new branch on andrewhk-nm repo
+
     Dim UpdateClipboard As Boolean 'When true, update the clipboad with new data from txtCur before refreshing
 
     Private Sub tmrCheckClipboard_Tick(sender As Object, e As EventArgs) Handles tmrCheckClipboard.Tick
@@ -309,7 +311,7 @@ Public Class frmMain
 
     Private Sub LCaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LCaseToolStripMenuItem.Click
         'Toggle Convert to all Upper Case
-        With LCASEToolStripMenuItem
+        With LCaseToolStripMenuItem
             If .Checked Then
                 .Checked = False
                 F3ToolStripMenuItem.Checked = False
@@ -420,7 +422,7 @@ Public Class frmMain
         'If Check0and1 is true, don't update history if the passed NewHist is equal to items one or two.
         'This will prevent bouncing back and forth when filters are applied
         On Error GoTo errh
-        
+
 
         'The item is already in History, remove it so it's not a dup when it moves to the top. If it's already at the top do nothing
         If (Check0and1 = False And lstHistoryActual.Items(0) <> NewHist) _
