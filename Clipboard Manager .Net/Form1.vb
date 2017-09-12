@@ -147,6 +147,9 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+
+        Exit Sub
+
         'Hold the size of the form less the title bar
         Dim MeHeight As Integer = Me.Height - SystemInformation.CaptionHeight - MenuStrip1.Height
         Dim MeWidth As Integer = Me.Width - SystemInformation.Border3DSize.Width
@@ -265,6 +268,12 @@ Public Class frmMain
                 UpdateClipboard = True
                 CurText = NewText
             End If
+        End If
+
+        If LookupEnabledToolStripMenuItem.Checked Then
+            'Search the database for the clipboard text, return to the specified location.
+
+
         End If
 
         ApplyFilter = CurText 'Return the filtered text 
@@ -485,8 +494,10 @@ errh:
         Resume
     End Sub
 
-    Private Sub EnabledToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EnabledToolStripMenuItem1.Click
+    Private Sub LookupEnabledToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LookupEnabledToolStripMenuItem.Click
         'TODO Given Member number, find referrals submitted or other notes
+        'Un/Check the root level box as appropriate to match this one
+        LookupToolStripMenuItem.Checked = LookupEnabledToolStripMenuItem.Checked
     End Sub
 
     Private Sub SaveState()
@@ -622,6 +633,12 @@ errh:
         'Clear the clipboard
         Clipboard.Clear()
         DoUpdateTxtCur("")
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        'Debug.Print(LookupDataSet.IsInitialized)
+        'Debug.Print (LookupDataSet.)
+
     End Sub
 End Class
 
