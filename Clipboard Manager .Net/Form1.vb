@@ -3,6 +3,7 @@
 Public Class frmMain
 
     'First change after successful publish/push to new branch on andrewhk-nm repo
+    ' Try again with another change
 
     Dim UpdateClipboard As Boolean 'When true, update the clipboad with new data from txtCur before refreshing
 
